@@ -237,7 +237,7 @@ function buildHeap(nums: number[]) {
 // 堆化操作，即重新调整堆
 // 此例为大根堆
 function heapify(nums: number[], i: number, len: number) {
-    if(!len) {
+    if (!len) {
         return;
     }
     // [...i...(2 * i + 1),(2 * i + 2)...]
@@ -299,7 +299,7 @@ function merge(nums: number[], l: number, mid: number, r: number) {
     // 细节：i 的起始值为 l
     for (let i = l; i <= r; i++) {
         // idx2 > r 表示 数组2 的元素已经用完
-        if (idx1 <= mid && nums[idx1] <= nums[idx2] || idx2 > r) {
+        if (idx2 > r || (idx1 <= mid && nums[idx1] <= nums[idx2])) {
             temp.push(nums[idx1++]);
         } else {
             temp.push(nums[idx2++]);
