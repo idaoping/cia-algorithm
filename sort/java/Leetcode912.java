@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * https://leetcode.cn/problems/sort-an-array/
  * 912. 排序数组
@@ -14,7 +17,7 @@
  * 1 <= nums.length <= 5 * 104
  * -5 * 104 <= nums[i] <= 5 * 104
  */
-class Solution {
+public class Leetcode912 {
     public int[] sortArray(int[] nums) {
         // bubbleSort(nums);
         mergeSort(nums, 0, nums.length - 1);
@@ -66,7 +69,7 @@ class Solution {
         // int len = right - left + 1;
         // int[] temp = new int[right - left + 1];
 
-        List<Integer> temp = new ArrayList();
+        List<Integer> temp = new ArrayList<>();
         int idx1 = left;
         int idx2 = mid + 1;
 
