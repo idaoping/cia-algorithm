@@ -315,19 +315,19 @@ function merge(nums: number[], l: number, mid: number, r: number) {
 
 ### 快速排序（Quick Sort）
 
-> 基于分治的算法，最好情况：O(NlogN^2)，最坏情况：O(N^2)
+> 基于分治的算法，最好情况：O(NlogN)，最坏情况：O(N^2)
 > * 从数组中（随机或中间）选择一个基准元素 pivot
 > * 将小于 pivot 的元素放在左边，大于 pivot 的元素放在右边
 > * 对左、右两边的子数组重复 1、2 步骤
-> * 随机选取 pivot，期望的时间复杂度为 O(NlogN^2)，最坏情况 O(N^2)
+> * 随机选取 pivot，期望的时间复杂度为 O(NlogN)，最坏情况 O(N^2)
 
 > 参考
 > * https://shimo.im/docs/ACAlmaE7awcywe0P/read
 > * https://www.bilibili.com/video/BV1q64y1S7Ax
 
 > 归并排序 VS 快速排序
-> * 归并排序：先排序左右子数组，然后合并两个有序数组
-> * 快速排序：先分配好左右子数组，然后对左右子数组分别排序（重复快速排序）
+> * 归并排序：先排序左右子数组，然后合并两个**有序**数组
+> * 快速排序：先分配好左右子数组（此时，无序），然后对左右子数组分别排序（重复快速排序）
 > * 代码具体表现为：归并是先递归，再处理本层逻辑，快排是先处理本层逻辑，再递归
 > * 归并在合并处理时，需要开辟额外空间，再拷贝回原数组
 
@@ -352,6 +352,8 @@ function quickSort(nums: number[], l: number, r: number) {
 
 function partition(nums: number[], l: number, r: number) {
     // 随机选一个基准值
+    // 理解 Math.random() * (r - l + 1)：总共有 r-l+1 个元素
+    // eg. [0.....5] => 5 - 0 + 1 = 6
     const idx = l + Math.floor(Math.random() * (r - l + 1));
     const pivot = nums[idx];
 
