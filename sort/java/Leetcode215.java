@@ -41,19 +41,38 @@ public class Leetcode215 {
     }
 
     public int findKthLargest2(int[] nums, int k) {
-        // 优先队列（堆排序）：时间复杂度：O(N)（建堆） + O(klogN)（取 K 次最值）
 
-        PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> o2 - o1); // 大根堆
-        // 建立堆：O(N)
+        // 关键点与模式识别：维护【动态】数据的【最大最小值】，考虑使用堆
+        // 动态指：有 n 个元素，维护 k 个元素，其中 k <= n
+
+        // 写法一：建立大根堆
+        // 优先队列（堆排序）：时间复杂度：O(N)（建堆） + O(klogN)（取 K 次最大值）
+
+        // PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> o2 - o1); // 大根堆
+        // // 建立堆：O(N)
+        // for (int n : nums) {
+        //     pq.add(n);
+        // }
+        // while (k > 1) { // 弹出 k-1 次最值：O((k-1)logN) => O(klogN)
+        //     pq.poll();
+        //     k--;
+        // }
+        // return pq.peek(); // 取第 k 最值
+
+        // 写法二：建立容量为 k 的【小根堆】，时间复杂度：O((N-K)logK) => O(NlogK)，其中调整堆：O(logK)
+        PriorityQueue<Integer> heap = new PriorityQueue<>((o1, o2) -> o1 - o2);
+
         for (int n : nums) {
-            pq.add(n);
+            heap.add(n);
+            // 只保留 k 容量的堆，即去除 n-k 个最小值
+            // [.....k....n]
+            if (heap.size() > k) {
+                heap.poll();
+            }
         }
-        while (k > 1) { // 弹出 k-1 次最值：O((k-1)logN) => O(klogN)
-            pq.poll();
-            k--;
-        }
+        // 最后的 k 个元素中，堆顶元素即为第 k 大值
+        return heap.peek();
 
-        return pq.peek(); // 取第 k 最值
     }
 
     public int findKthLargest3(int[] nums, int k) {
@@ -63,6 +82,10 @@ public class Leetcode215 {
         return quickSort(nums, 0, n - 1, n - k);
     }
 
+    // 模式识别：【确定数量】的数据情况下查找【第 k 大/小】值，考虑快速排序
+    // 1.确定数量数据指：数组元素提前给定了且不变
+    // 2.如果是动态的，考虑堆；动态指：有 n 个元素，维护 k 个元素，其中 k <= n
+    // 
     // 快速排序：查找第 k 小的值
     // 思路
     // 1.将序列分成了左、右子数组且分别为：[较小的 p 个数][较大的 n - p 个数]
