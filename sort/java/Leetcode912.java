@@ -24,31 +24,31 @@ public class Leetcode912 {
         return nums;
     }
 
-    // 冒泡排序
-    private void bubbleSort(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return;
-        }
+    // // 冒泡排序
+    // private void bubbleSort(int[] nums) {
+    //     if (nums == null || nums.length == 0) {
+    //         return;
+    //     }
 
-        boolean swapped = false;
-        for (int i = 0; i < nums.length - 1; i++) {
+    //     boolean swapped = false;
+    //     for (int i = 0; i < nums.length - 1; i++) {
 
-            for (int j = 0; j < nums.length - 1 - i; j++) {
+    //         for (int j = 0; j < nums.length - 1 - i; j++) {
 
-                if (nums[j] > nums[j + 1]) {
-                    int n = nums[j];
-                    nums[j] = nums[j + 1];
-                    nums[j + 1] = n;
+    //             if (nums[j] > nums[j + 1]) {
+    //                 int n = nums[j];
+    //                 nums[j] = nums[j + 1];
+    //                 nums[j + 1] = n;
 
-                    swapped = true;
-                }
-            }
+    //                 swapped = true;
+    //             }
+    //         }
 
-            if (swapped == false) {
-                return;
-            }
-        }
-    }
+    //         if (swapped == false) {
+    //             return;
+    //         }
+    //     }
+    // }
 
     // 归并排序
     private void mergeSort(int[] nums, int left, int right) {
